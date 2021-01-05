@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:godevi/models/models.dart';
+import 'package:godevi/services/services.dart';
+import 'package:godevi/shareds/shared.dart';
 
 part './slider_controller.dart';
 part './package_controller.dart';

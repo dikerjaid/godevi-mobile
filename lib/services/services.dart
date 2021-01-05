@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:godevi/shareds/shared.dart';
-import 'package:godevi/models/models.dart';
 
 part 'auth_service.dart';
 part 'slider_service.dart';

@@ -49,9 +49,9 @@ class _HomePageScreenState extends State<HomePageScreen>
   getPackagePopular() async {
     _packageController.setLoading(true);
     final response = await PackageServices.getPopular(refresh: true);
+
     _packageController.setLoading(false);
     _packageController.initData(PackageModels.fromJson(response));
-    return await PackageServices.getPopular(refresh: true);
   }
 
   @override

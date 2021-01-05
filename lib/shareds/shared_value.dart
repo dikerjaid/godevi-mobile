@@ -1,5 +1,6 @@
 part of 'shared.dart';
 
+// String uri = 'https://beta.godestinationvillage.com';
 String uri = 'http://192.168.1.8:8000';
 String baseUrl = uri + '/api/';
 String urlImage = uri + '/storage/';

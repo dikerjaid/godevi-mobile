@@ -11,4 +11,15 @@ class PackageServices {
       return e;
     }
   }
+
+  static Future searchPackage(String keyword) async {
+    try {
+      final response = await dio.get('/packages/search/$keyword');
+
+      return json.decode(response.data);
+    } catch (e) {
+      Bot.sendMessage("package_services.dart", e.toString());
+      return e;
+    }
+  }
 }
