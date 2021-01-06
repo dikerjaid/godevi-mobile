@@ -13,11 +13,6 @@ class _ExplorerPageState extends State<ExplorerPage> {
   final _packageController = new PackageController();
 
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(

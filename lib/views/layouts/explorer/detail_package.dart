@@ -433,12 +433,13 @@ class _DetailPackageState extends State<DetailPackage>
                 widget.packageData.name,
                 textAlign: TextAlign.left,
                 style: TextStyle(
-                  fontWeight: FontWeight.w600,
-                  fontSize: 22,
-                  color: isInList
-                      ? AppTheme.getTheme().textTheme.body1.color
-                      : Colors.white,
-                ),
+                    fontWeight: FontWeight.w600,
+                    fontSize: 22,
+                    color: Colors.white
+                    // color: isInList
+                    //     ? AppTheme.getTheme().textTheme.body1.color
+                    //     : Colors.white,
+                    ),
               ),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -510,12 +511,11 @@ class _DetailPackageState extends State<DetailPackage>
               "\$${widget.packageData.price}",
               textAlign: TextAlign.left,
               style: TextStyle(
-                fontWeight: FontWeight.w600,
-                fontSize: 22,
-                color: isInList
-                    ? AppTheme.getTheme().textTheme.body1.color
-                    : Colors.white,
-              ),
+                  fontWeight: FontWeight.w600, fontSize: 22, color: Colors.white
+                  // color: isInList
+                  //     ? AppTheme.getTheme().textTheme.body1.color
+                  //     : Colors.white,
+                  ),
             ),
             Text(
               "/per night",

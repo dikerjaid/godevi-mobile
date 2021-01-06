@@ -146,10 +146,7 @@ class OverlayedContainer extends StatelessWidget {
           children: <Widget>[
             Text(
               "$title",
-              style: Theme.of(context)
-                  .textTheme
-                  .subtitle
-                  .copyWith(color: Colors.white),
+              style: gfont,
             ),
             Row(
               children: <Widget>[
@@ -168,10 +165,7 @@ class OverlayedContainer extends StatelessWidget {
                   flex: 9,
                   child: Text(
                     "$author",
-                    style: Theme.of(context)
-                        .textTheme
-                        .subtitle
-                        .copyWith(color: Colors.white),
+                    style: gfont,
                   ),
                 )
               ],

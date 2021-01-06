@@ -19,9 +19,10 @@ class _HomePageScreenState extends State<HomePageScreen>
   void initState() {
     animationController =
         AnimationController(duration: Duration(milliseconds: 400), vsync: this);
-    getSlider();
-    getVillage();
-    getPackagePopular();
+
+    _sliderController.initData();
+    _packageController.initData();
+    _villageController.initData();
     animationController..forward();
     super.initState();
   }
@@ -30,28 +31,6 @@ class _HomePageScreenState extends State<HomePageScreen>
   void dispose() {
     animationController.dispose();
     super.dispose();
-  }
-
-  getSlider() async {
-    _sliderController.setLoading(true);
-    final response = await SliderServices.getSlider(refresh: true);
-    _sliderController.setLoading(false);
-    _sliderController.initData(SliderModel.fromJson(response));
-  }
-
-  getVillage() async {
-    _villageController.setLoading(true);
-    final response = await VillageServices.getVillage(refresh: true);
-    _villageController.setLoading(false);
-    _villageController.initData(VillageModel.fromJson(response));
-  }
-
-  getPackagePopular() async {
-    _packageController.setLoading(true);
-    final response = await PackageServices.getPopular(refresh: true);
-
-    _packageController.setLoading(false);
-    _packageController.initData(PackageModels.fromJson(response));
   }
 
   @override

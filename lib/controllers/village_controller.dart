@@ -4,8 +4,10 @@ class VillageController extends GetxController {
   VillageModel village;
   bool isLoading = true;
 
-  initData(VillageModel data) {
-    village = data;
+  initData() async {
+    final response = await VillageServices.getVillage(refresh: true);
+    village = VillageModel.fromJson(response);
+    isLoading = false;
     update();
   }
 

@@ -4,8 +4,10 @@ class PackageController extends GetxController {
   PackageModels package;
   bool isLoading = true;
 
-  initData(PackageModels data) {
-    package = data;
+  initData() async {
+    final response = await PackageServices.getPopular(refresh: true);
+    package = PackageModels.fromJson(response);
+    isLoading = false;
     update();
   }
 

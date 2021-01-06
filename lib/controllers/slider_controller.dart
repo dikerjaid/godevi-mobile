@@ -5,8 +5,11 @@ class SliderController extends GetxController {
   PageController pageController = PageController(initialPage: 0);
   bool isLoading = true;
 
-  initData(SliderModel data) {
-    slider = data;
+  initData() async {
+    final response = await SliderServices.getSlider(refresh: true);
+
+    slider = SliderModel.fromJson(response);
+    isLoading = false;
     update();
   }
 
