@@ -1,9 +1,7 @@
 part of '../../pages.dart';
 
 class UnpaidListView extends StatefulWidget {
-  final AnimationController animationController;
-
-  const UnpaidListView({Key key, this.animationController}) : super(key: key);
+  const UnpaidListView({Key key}) : super(key: key);
   @override
   _UnpaidListViewState createState() => _UnpaidListViewState();
 }
@@ -21,38 +19,36 @@ class _UnpaidListViewState extends State<UnpaidListView> {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: RefreshIndicator(
-        onRefresh: () async {
-          _cartController.initData();
-        },
-        child: Container(
-          child: GetBuilder<CartController>(builder: (state) {
-            return state.isLoading
-                ? Component.spiner()
-                : ListView.builder(
-                    itemCount: state.unpaid.data.data.length,
-                    padding: EdgeInsets.only(top: 8, bottom: 100),
-                    scrollDirection: Axis.vertical,
-                    itemBuilder: (context, index) {
-                      return BookingListView(
-                        callback: () {
-                          // Navigator.push(
-                          //   context,
-                          //   MaterialPageRoute(
-                          //     builder: (context) => RoomBookingScreen(
-                          //       hotelName: hotelList[index].titleTxt,
-                          //     ),
-                          //   ),
-                          // );
-                        },
-                        unpaidData: state.unpaid.data.data[index],
-                        isShowDate: true,
-                      );
-                    },
-                  );
-          }),
-        ),
+    return RefreshIndicator(
+      onRefresh: () async {
+        _cartController.initData();
+      },
+      child: Container(
+        child: GetBuilder<CartController>(builder: (state) {
+          return state.isLoading
+              ? Component.spiner()
+              : ListView.builder(
+                  itemCount: state.unpaid.data.data.length,
+                  padding: EdgeInsets.only(top: 8, bottom: 100),
+                  scrollDirection: Axis.vertical,
+                  itemBuilder: (context, index) {
+                    return BookingListView(
+                      callback: () {
+                        // Navigator.push(
+                        //   context,
+                        //   MaterialPageRoute(
+                        //     builder: (context) => RoomBookingScreen(
+                        //       hotelName: hotelList[index].titleTxt,
+                        //     ),
+                        //   ),
+                        // );
+                      },
+                      unpaidData: state.unpaid.data.data[index],
+                      isShowDate: true,
+                    );
+                  },
+                );
+        }),
       ),
     );
   }

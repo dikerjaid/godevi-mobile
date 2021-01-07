@@ -17,21 +17,6 @@ class _DetailPackageState extends State<DetailPackage>
       "Featuring a fitness center, Grand Royale Park Hote is located in Sweden, 4.7 km frome National Museum a fitness center, Grand Royale Park Hote is located in Sweden, 4.7 km frome National Museum a fitness center, Grand Royale Park Hote is located in Sweden, 4.7 km frome National Museum";
   bool isFav = false;
   bool isReadless = false;
-  AnimationController animationController;
-
-  @override
-  void initState() {
-    animationController = AnimationController(
-        duration: Duration(milliseconds: 2000), vsync: this);
-    animationController.forward();
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    animationController.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {

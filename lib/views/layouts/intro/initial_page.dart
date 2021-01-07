@@ -6,15 +6,17 @@ class InitialPage extends StatefulWidget {
 }
 
 class _InitialPageState extends State<InitialPage> {
+  final _cartController = Get.put(CartController());
+  final _unpaidController = Get.put(CartController());
+  final _authController = Get.put(AuthController());
   _initialize() async {
-    // Timer(Duration(seconds: 3), () {
-    //   Fn.navigate(context, IntroductionScreen());
-    // });
-
     String logged = await Storage.read('logged_at');
     Navigator.of(context).popUntil((route) => route.isFirst);
 
     if (logged != null) {
+      _cartController.initData();
+      _authController.initData();
+      _unpaidController.initData();
       Timer(Duration(seconds: 1), () => Get.to(DashboardPage()));
 //          Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext context) => Dashboard())));
     } else {

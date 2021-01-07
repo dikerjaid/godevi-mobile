@@ -1,98 +1,61 @@
 part of '../../pages.dart';
 
 class CartPage extends StatefulWidget {
-  final AnimationController animationController;
-
-  const CartPage({Key key, this.animationController}) : super(key: key);
+  const CartPage({
+    Key key,
+  }) : super(key: key);
   @override
   _CartPageState createState() => _CartPageState();
 }
 
 class _CartPageState extends State<CartPage> with TickerProviderStateMixin {
-  AnimationController tabAnimationController;
+  final _unpaidController = Get.put(CartController());
 
   Widget indexView = Container();
   TopBarType topBarType = TopBarType.Unpaid;
-
   @override
   void initState() {
-    tabAnimationController =
-        AnimationController(duration: Duration(milliseconds: 400), vsync: this);
-    indexView = UnpaidListView(
-      animationController: tabAnimationController,
-    );
-    tabAnimationController..forward();
-    widget.animationController.forward();
-
     super.initState();
-  }
-
-  Future<bool> getData() async {
-    await Future.delayed(const Duration(milliseconds: 200));
-    return true;
-  }
-
-  @override
-  void dispose() {
-    tabAnimationController.dispose();
-    super.dispose();
+    _unpaidController.initData();
+    indexView = UnpaidListView();
+    topBarType = TopBarType.Unpaid;
   }
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedBuilder(
-      animation: widget.animationController,
-      builder: (BuildContext context, Widget child) {
-        return FadeTransition(
-          opacity: widget.animationController,
-          child: new Transform(
-            transform: new Matrix4.translationValues(
-                0.0, 40 * (1.0 - widget.animationController.value), 0.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Padding(
-                  padding:
-                      EdgeInsets.only(top: MediaQuery.of(context).padding.top),
-                  child: Container(child: appBar()),
-                ),
-                tabViewUI(topBarType),
-                Expanded(
-                  child: indexView,
-                ),
-              ],
-            ),
-          ),
-        );
-      },
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Padding(
+          padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
+          child: Container(child: appBar()),
+        ),
+        tabViewUI(topBarType),
+        Expanded(
+          child: indexView,
+        ),
+      ],
     );
   }
 
   void tabClick(TopBarType tabType) {
     if (tabType != topBarType) {
       topBarType = tabType;
-      tabAnimationController.reverse().then((f) {
-        if (tabType == TopBarType.Unpaid) {
-          setState(() {
-            indexView = UnpaidListView(
-              animationController: tabAnimationController,
-            );
-          });
-        } else if (tabType == TopBarType.Finished) {
-          setState(() {
-            indexView = FinishTripView(
-              animationController: tabAnimationController,
-            );
-          });
-        } else if (tabType == TopBarType.Favorites) {
-          setState(() {
-            indexView = FavoritesListView(
-              animationController: tabAnimationController,
-            );
-          });
-        }
-      });
+
+      if (tabType == TopBarType.Unpaid) {
+        setState(() {
+          indexView = UnpaidListView();
+        });
+      } else if (tabType == TopBarType.Finished) {
+        setState(() {
+          indexView = FinishTripView();
+        });
+      } else if (tabType == TopBarType.Favorites) {
+        setState(() {
+          indexView = FavoritesListView();
+        });
+      }
     }
   }
 
@@ -117,6 +80,7 @@ class _CartPageState extends State<CartPage> with TickerProviderStateMixin {
                       splashColor:
                           AppTheme.getTheme().primaryColor.withOpacity(0.2),
                       onTap: () {
+                        _unpaidController.initData();
                         tabClick(TopBarType.Unpaid);
                       },
                       child: Padding(
@@ -191,9 +155,9 @@ class _CartPageState extends State<CartPage> with TickerProviderStateMixin {
                 )
               ],
             ),
-            SizedBox(
-              height: MediaQuery.of(context).padding.bottom,
-            )
+            // SizedBox(
+            //   height: MediaQuery.of(context).padding.bottom,
+            // )
           ],
         ),
       ),
@@ -208,7 +172,7 @@ class _CartPageState extends State<CartPage> with TickerProviderStateMixin {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text(
-            "My Trips",
+            "My Reservations",
             style: new TextStyle(
               fontSize: 22,
               fontWeight: FontWeight.w700,

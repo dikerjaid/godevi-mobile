@@ -10,65 +10,10 @@ class _DashboardPageState extends State<DashboardPage>
         SingleTickerProviderStateMixin,
         WidgetsBindingObserver,
         TickerProviderStateMixin {
-  AnimationController animationController;
-  TabController controller;
+  // TabController controller;
   final _navController = Get.put(NavController());
-
   int index = 0, pageIndex = 0;
   DateTime currentBackPressTime;
-
-  @override
-  void initState() {
-    animationController =
-        AnimationController(duration: Duration(milliseconds: 400), vsync: this);
-    WidgetsBinding.instance.addObserver(this);
-    SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values);
-    animationController..forward();
-    controller = new TabController(vsync: this, length: 5);
-    super.initState();
-  }
-
-  // Future<dynamic> openSupportChat() async {
-  //   Component.showIndicator(context, message: "Mohon Menunggu");
-  //   AuthModel auth =
-  //       AuthModel.fromJson(json.decode(await Storage.read('user')));
-  //   try {
-  //     dynamic user = {
-  //       'userId':
-  //           '${auth.email}', //Replace it with the userId of the logged in user
-  //       'password': 'PASSWORD',
-  //       'displayName': '${auth.name}',
-  //       //Put password here if user has password, ignore otherwise
-  //     };
-  //     dynamic conversationObject = {
-  //       'appId':
-  //           apiKommunicate, // The [APP_ID](https://dashboard.kommunicate.io/settings/install) obtained from Kommunicate dashboard.
-  //       'kmUser': jsonEncode(user)
-  //     };
-  //     KommunicateFlutterPlugin.buildConversation(conversationObject)
-  //         .then((clientConversationId) {
-  //       print("Conversation builder success : " +
-  //           clientConversationId.toString());
-  //       Navigator.pop(context);
-  //     }).catchError((error) {
-  //       print("Conversation builder error : " + error.toString());
-  //       Flutoast.toast("$error");
-  //       Navigator.pop(context);
-  //     });
-  //   } on Exception catch (e) {
-  //     Navigator.pop(context);
-  //     print("Error while updating user details : " + e.toString());
-  //   }
-  // }
-
-  @override
-  void dispose() {
-    animationController.dispose();
-    WidgetsBinding.instance.removeObserver(this);
-
-    controller.dispose();
-    super.dispose();
-  }
 
   Future<bool> onWillPop() {
     DateTime now = DateTime.now();
@@ -89,7 +34,6 @@ class _DashboardPageState extends State<DashboardPage>
           backgroundColor: Color.fromRGBO(229, 232, 236, 1),
           body: GetBuilder<NavController>(builder: (n) {
             pageIndex = n.navIndex;
-
             return Stack(
                 children: List<Widget>.generate(5, (int index) {
               return IgnorePointer(
@@ -102,20 +46,18 @@ class _DashboardPageState extends State<DashboardPage>
                         builder: (_) {
                           switch (index) {
                             case 0:
-                              return HomePageScreen(
-                                animationController: animationController,
-                              );
+                              return HomePageScreen();
                               break;
                             case 1:
                               return ExplorerPage();
                               break;
                             case 2:
-                              return BlogPage();
+                              return Menu(index);
+                              // return BlogPage();
                               break;
                             case 3:
-                              return CartPage(
-                                animationController: animationController,
-                              );
+                              // return Menu(index);
+                              return CartPage();
                               break;
                             default:
                               return ProfileScreen();

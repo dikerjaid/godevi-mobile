@@ -12,10 +12,16 @@ class PackageController extends GetxController {
   }
 
   searchData(String keyword) async {
+    if (keyword == "") {
+      initData();
+      return;
+    }
+    isLoading = true;
     final response = await PackageServices.searchPackage("$keyword");
-    Fn.ansi("==package $response");
-    package = PackageModels.fromJson(response);
 
+    package = PackageModels.fromJson(response);
+    Fn.ansi("==package $response");
+    isLoading = false;
     update();
   }
 

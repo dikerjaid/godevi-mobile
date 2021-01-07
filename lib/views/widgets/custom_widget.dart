@@ -104,7 +104,7 @@ class NoData extends StatelessWidget {
           width: size,
           decoration: BoxDecoration(
               image: DecorationImage(
-            image: AssetImage(assetImage + 'nodata.png'),
+            image: AssetImage(assetImage + '/nodata.png'),
           )),
         ),
         message == null

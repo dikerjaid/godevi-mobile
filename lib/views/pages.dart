@@ -1,11 +1,9 @@
 import 'dart:async';
-import 'dart:convert';
 import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_page_indicator/flutter_page_indicator.dart';
 import 'package:godevi/controllers/controllers.dart';
 import 'package:godevi/models/models.dart';

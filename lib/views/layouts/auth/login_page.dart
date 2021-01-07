@@ -10,6 +10,8 @@ class _LoginPageState extends State<LoginPage> {
           text: 'adiyoga27new@gmail.com'), // 1122110002, XAMthone1234
       passwordController = TextEditingController(text: 'bogis1996');
   Timer loginTimer;
+
+  final _authController = Get.put(AuthController());
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -355,6 +357,8 @@ class _LoginPageState extends State<LoginPage> {
       Flutoast.toast(response['messages']);
       Navigator.pop(context);
       await Storage.write('logged_at', _dateT.toString());
+
+      _authController.initData();
       Get.to(DashboardPage());
     }
   }
